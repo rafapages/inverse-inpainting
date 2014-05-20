@@ -5,4 +5,4 @@ all: inpainting
 
 
 inpainting: $(OBJECTS)
-	g++ -o inpainting $(OBJECTS) -lopencv_core -lopencv_highgui -lopencv_imgproc
+	g++ -o inpainting $(OBJECTS) -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_photo
