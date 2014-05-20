@@ -9,11 +9,15 @@
 using namespace std;
 using namespace cv;
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]){
 
-    Mat inputImage = imread("inputImage.png", CV_LOAD_IMAGE_COLOR);
-    Mat inputSil   = imread("inputSil.png", CV_LOAD_IMAGE_GRAYSCALE);
+    if( argc != 4){
+        cout << "Wrong number of arguments!" << endl;
+        return -1;
+    }
+
+    Mat inputImage = imread(argv[1], CV_LOAD_IMAGE_COLOR);
+    Mat inputSil   = imread(argv[2], CV_LOAD_IMAGE_GRAYSCALE);
 
     Mat eroder  = getStructuringElement(MORPH_RECT, Size(7,7));
     erode(inputSil, inputSil, eroder);
@@ -34,8 +38,8 @@ int main(int argc, char *argv[])
     namedWindow( "Display window3", WINDOW_AUTOSIZE );// Create a window for display.
     imshow( "Display window3", outputImage );
 
+    imwrite(argv[3], outputImage);
     waitKey(0);
-
 
     return 0;
 }
