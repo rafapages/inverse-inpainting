@@ -19,9 +19,16 @@ int main(int argc, char *argv[]){
     Mat inputImage = imread(argv[1], CV_LOAD_IMAGE_COLOR);
     Mat inputSil   = imread(argv[2], CV_LOAD_IMAGE_GRAYSCALE);
 
-    Mat eroder  = getStructuringElement(MORPH_RECT, Size(7,7));
+    threshold(inputSil, inputSil, 1, 255, THRESH_BINARY);
+
+    namedWindow( "Original segmentation image", WINDOW_AUTOSIZE );// Create a window for display.
+    imshow( "Original segmentation image", inputSil );                   // Show our image inside it.
+
+    Mat eroder  = getStructuringElement(MORPH_RECT, Size(5,5));
+//    Mat dilater = getStructuringElement(MORPH_RECT, Size(5,5));
+
     erode(inputSil, inputSil, eroder);
-    erode(inputSil, inputSil, eroder);
+//    erode(inputSil, inputSil, eroder);
 
     Mat invSil =  Scalar::all(255) - inputSil;
 
@@ -29,14 +36,14 @@ int main(int argc, char *argv[]){
 
     inpaint(inputImage, invSil, outputImage, 7, INPAINT_TELEA);
 
-    namedWindow( "Display window1", WINDOW_AUTOSIZE );// Create a window for display.
-    imshow( "Display window1", inputImage );                   // Show our image inside it.
+    namedWindow( "Input image", WINDOW_AUTOSIZE );// Create a window for display.
+    imshow( "Input image", inputImage );                   // Show our image inside it.
 
-    namedWindow( "Display window2", WINDOW_AUTOSIZE );// Create a window for display.
-    imshow( "Display window2", invSil );                   // Show our image inside it.
+    namedWindow( "Eroded segmented image", WINDOW_AUTOSIZE );// Create a window for display.
+    imshow( "Eroded segmented image", invSil );                   // Show our image inside it.
 
-    namedWindow( "Display window3", WINDOW_AUTOSIZE );// Create a window for display.
-    imshow( "Display window3", outputImage );
+    namedWindow( "Extended output image", WINDOW_AUTOSIZE );// Create a window for display.
+    imshow( "Extended output image", outputImage );
 
     imwrite(argv[3], outputImage);
     waitKey(0);
