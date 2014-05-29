@@ -1,6 +1,6 @@
 # Background removal by inverse inpainting
 
-This simple method uses Telea's inpainting algorithm to remove the background of an image by extending the foreground. It is necesary to provide the mask which determines the background.
+This simple method uses Telea's inpainting algorithm to remove the background of an image by extending the foreground. It is necesary to provide the mask which determines the background. OpenCV is used.
 
 The method takes three arguments:
 

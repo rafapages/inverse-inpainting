@@ -21,8 +21,8 @@ int main(int argc, char *argv[]){
 
     threshold(inputSil, inputSil, 1, 255, THRESH_BINARY);
 
-    namedWindow( "Original segmentation image", WINDOW_AUTOSIZE );// Create a window for display.
-    imshow( "Original segmentation image", inputSil );                   // Show our image inside it.
+    namedWindow( "Original segmentation image", WINDOW_AUTOSIZE );
+    imshow( "Original segmentation image", inputSil );
 
     Mat eroder  = getStructuringElement(MORPH_RECT, Size(5,5));
 //    Mat dilater = getStructuringElement(MORPH_RECT, Size(5,5));
@@ -36,13 +36,13 @@ int main(int argc, char *argv[]){
 
     inpaint(inputImage, invSil, outputImage, 7, INPAINT_TELEA);
 
-    namedWindow( "Input image", WINDOW_AUTOSIZE );// Create a window for display.
-    imshow( "Input image", inputImage );                   // Show our image inside it.
+    namedWindow( "Input image", WINDOW_AUTOSIZE );
+    imshow( "Input image", inputImage );
 
-    namedWindow( "Eroded segmented image", WINDOW_AUTOSIZE );// Create a window for display.
-    imshow( "Eroded segmented image", invSil );                   // Show our image inside it.
+    namedWindow( "Eroded segmented image", WINDOW_AUTOSIZE );
+    imshow( "Eroded segmented image", invSil );
 
-    namedWindow( "Extended output image", WINDOW_AUTOSIZE );// Create a window for display.
+    namedWindow( "Extended output image", WINDOW_AUTOSIZE );
     imshow( "Extended output image", outputImage );
 
     imwrite(argv[3], outputImage);
